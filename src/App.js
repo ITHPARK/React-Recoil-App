@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import {Routes, Route, Outlet} from 'react-router-dom';
+import {RecoilRoot} from 'recoil';
 import './reset.css';
 import './App.css';
 import Nav from './components/Nav';
@@ -19,14 +20,16 @@ const LayOut = () => {
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<LayOut/>}>
-          <Route index element={<List/>}/>
-          <Route index element={<Admin/>}/>
-        </Route>
-      </Routes>
-    </div>
+    <RecoilRoot>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<LayOut/>}>
+            <Route index element={<List/>}/>
+            <Route index element={<Admin/>}/>
+          </Route>
+        </Routes>
+      </div>
+    </RecoilRoot>
   );
 }
 

@@ -1,11 +1,46 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom';
 import {useRecoilState} from 'recoil';
-import {CafeList} from '../atoms/atom';
+import {Post} from '../atoms/atom';
+import Pagination from './Pagination'
+import axios from 'axios';
+
 
 const List = () => {
 
-  const [todos, setTodos] = useRecoilState(CafeList);
+  const [lists, setLists] = useRecoilState(Post);
+
+  //현재 페이지
+  const [currentPage, setCurrentPage] = useState(1);
+
+  //페이징 페이지
+  const [pagingCurrent, setPagingCurrent] = useState(1);
+
+
+  const fetchListData  = async() => {
+    try {
+      const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      const resData = res.data;
+
+      const result = resData.map((a) => ({
+        //객체를 복사하여 view 키를 추가
+        ...a,
+        view:true
+      }))
+
+      setLists(result);   
+   
+    }catch(e) {
+      console.log(e);
+    }
+    
+  }
+
+
+   useEffect(() => {
+    fetchListData();
+   }, [])
+   
 
 
   return (
@@ -31,42 +66,34 @@ const List = () => {
         </div>
         <div className='list'>
           <div className='list_inner'>
-            <ul>
-              <li>
-                <Link to='/'>
-                  <span className='title'>{todos[0]}</span>
-                  <span className='date'>2024.01.01</span>
-                </Link>
-              </li>
-              <li>
-                <Link to='/'>
-                  <span className='title'>titletitletitle</span>
-                  <div className='info'>
-                    <span className=''>작성자</span>
-                  <span className='date'>2024.01.01</span>
+            <h2 className='cafe_title'>카페 글</h2>
+            <ul className='post_list'>
+              {
+                lists.map((item, idx) => {
+
+                  if(idx < 10){
+                    return(
+                      <li key={item.id}>
+                        <Link to="/">
+                          <span className='post_title'>{item.title}</span>
+                          <div className='info'>
+                            <span className='post_user'>{item.userId}</span>
+                            <span className='post_data'>2024.03.01</span>
+                          </div>
+                        </Link>
+                      </li>
+                    )
+                  }
                   
-                  </div>
-                </Link>
-              </li>
-              <li>
-                <Link to='/'>
-                  <span className='title'>titletitletitle</span>
-                  <span className='date'>2024.01.01</span>
-                </Link>
-              </li>
-              <li>
-                <Link to='/'>
-                  <span className='title'>titletitletitle</span>
-                  <span className='date'>2024.01.01</span>
-                </Link>
-              </li>
-              <li>
-                <Link to='/'>
-                  <span className='title'>titletitletitle</span>
-                  <span className='date'>2024.01.01</span>
-                </Link>
-              </li>
+                })
+              }
             </ul>
+            <Pagination
+              pagingCurrent={pagingCurrent}
+              setPagingCurrent={setPagingCurrent}
+              listLen = {lists.length}
+            />
+           
           </div>
         </div>
       </div>

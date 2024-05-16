@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LayOut/>}>
             <Route index element={<List/>}/>
-            <Route index element={<Admin/>}/>
+            <Route path="/admin" element={<Admin/>}/>
           </Route>
         </Routes>
       </div>

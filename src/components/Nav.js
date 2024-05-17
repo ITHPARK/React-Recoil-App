@@ -11,10 +11,10 @@ const Nav = () => {
         <div className='nav_right'>
           <ul>
             <li>
-              <Link>카페글</Link>
+              <Link to="/">카페글</Link>
             </li>
             <li>
-              <Link>관리자</Link>
+              <Link to="/admin">관리자</Link>
             </li>
           </ul>
         </div>

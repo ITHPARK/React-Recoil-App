@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Post} from '../atoms/atom';
 
 
-const Pagination = ({pagingCurrent ,setPagingCurrent, listLen}) => {
+const Pagination = ({setCurrentPage, pagingCurrent ,setPagingCurrent, listLen}) => {
 
   const [pagingArr, setPagingArr] = useState([]);
 
@@ -39,7 +39,7 @@ const Pagination = ({pagingCurrent ,setPagingCurrent, listLen}) => {
   }, [pagingCurrent, listLen]);
 
   const handleClickList = (e) => {
-    console.log(e);
+    setCurrentPage(e);
   }
   
 
@@ -52,7 +52,7 @@ const Pagination = ({pagingCurrent ,setPagingCurrent, listLen}) => {
            {
             pagingArr.map((a) => {
               return (
-                <button onClick={handleClickList(a)} key={a}>{a}</button>
+                <button onClick={() => handleClickList(a)} key={a}>{a}</button>
               )
             })
            }

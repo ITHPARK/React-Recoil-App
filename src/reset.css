@@ -54,3 +54,6 @@ button {
 a {
     color: #000;
 }
+* {
+	box-sizing: border-box;
+}

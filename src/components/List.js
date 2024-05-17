@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom';
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import {Post} from '../atoms/atom';
 import Pagination from './Pagination'
 import axios from 'axios';
@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const List = () => {
 
-  const [lists, setLists] = useRecoilState(Post);
+  const count = useRecoilValue(Post);
 
   //현재 페이지
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,35 +16,22 @@ const List = () => {
   //페이징 페이지
   const [pagingCurrent, setPagingCurrent] = useState(1);
 
+  useEffect(() => {
+      console.log(count);
 
-  const fetchListData  = async() => {
-    try {
-      const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-      const resData = res.data;
+  }, [])
 
-      const result = resData.map((a) => ({
-        //객체를 복사하여 view 키를 추가
-        ...a,
-        view:true
-      }))
+  const handleClickPost = (e) => {
 
-      setLists(result);   
-   
-    }catch(e) {
-      console.log(e);
+    if(!count[e].view){
+      alert("비공개 게시물입니다.")
     }
-    
   }
-
-
-   useEffect(() => {
-    fetchListData();
-   }, [])
-   
+  
 
 
   return (
-    <div className='cafe_main'>
+    <div className='wrap'>
       <div className='top'>
         <p>CAFE</p>
       </div>
@@ -69,18 +56,18 @@ const List = () => {
             <h2 className='cafe_title'>카페 글</h2>
             <ul className='post_list'>
               {
-                lists.map((item, idx) => {
+                count.map((item, idx) => {
 
-                  if(idx < 10){
+                  if(idx >= (currentPage - 1) * 10  && idx < currentPage * 10 ){
                     return(
-                      <li key={item.id}>
-                        <Link to="/">
+                      <li key={item.id}  className={item.view ? "" : "off"} onClick={() => handleClickPost(idx)}>
+                        <div className='post_box'  >
                           <span className='post_title'>{item.title}</span>
                           <div className='info'>
                             <span className='post_user'>{item.userId}</span>
                             <span className='post_data'>2024.03.01</span>
                           </div>
-                        </Link>
+                        </div>
                       </li>
                     )
                   }
@@ -89,11 +76,11 @@ const List = () => {
               }
             </ul>
             <Pagination
+              setCurrentPage = {setCurrentPage}
               pagingCurrent={pagingCurrent}
               setPagingCurrent={setPagingCurrent}
-              listLen = {lists.length}
+              listLen = {count.length}
             />
-           
           </div>
         </div>
       </div>

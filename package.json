@@ -21,7 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "master -d build"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -44,7 +44,7 @@
   "devDependencies": {
     "gh-pages": "^6.1.1"
   },
-  "homepage": "https://ithpark.github.io/react-recoil-app",
-  "name": "react-recoil-app",
-  "version": "0.1.0"
+  "homepage": "https://ithpark.github.io/react-recoil-app/index.html"
+  
+
 }

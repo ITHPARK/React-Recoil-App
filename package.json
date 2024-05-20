@@ -44,7 +44,6 @@
   "devDependencies": {
     "gh-pages": "^6.1.1"
   },
-  "homepage": "https://ithpark.github.io/react-recoil-app/index.html"
-  
+  "homepage": "https://ithpark.github.io/react-recoil-app"
 
 }

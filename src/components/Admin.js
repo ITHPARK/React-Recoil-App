@@ -110,7 +110,7 @@ const Admin = () => {
 
                         <div className="post_setting">
                           <div className='setting hide'>
-                            <span className='setting_tit'>공개</span>
+                            <span className='setting_tit'>비공개</span>
                             <div>
                               <input
                                 type="checkbox"

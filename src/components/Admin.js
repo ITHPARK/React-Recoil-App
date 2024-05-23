@@ -17,8 +17,11 @@ const Admin = () => {
   //관리자 페이지 아코디언 작업을 위한 state
   const [stateArr, setStateArr] = useState(Array(count.length).fill(false));
 
+  //관리자 페이지 
   const [titValue, setTitValue] = useState(Array(count.length));
 
+
+  //리스트 아코디언 함수
   const handleClick = (e) => {
     
     const updatedClickedItem = [...stateArr]; 
@@ -27,15 +30,19 @@ const Admin = () => {
 
   }
 
+  //포스트 공개, 비공개 설정
   const handleView = (e) => {
 
+    //atom을 복사
     const newArray = [...count];
 
+    //veiw값의 상태를 변경
     newArray[e] = {
       ...newArray[e],
       view: !newArray[e].view
     }
 
+    //view값을 변경한 배열을 atom값으로 변경
     setCount(newArray);
   
   }
@@ -43,39 +50,42 @@ const Admin = () => {
   //수정할 값을 배열에 저장
   const handleInput = (e, idx) => {
 
+    //post에 개수만큼 item을 가지는 배열을 복사 
     const result = [...titValue];
+
+    //해당 포스트의 index에 맞게 수정할 title값을 배열에 삽입
     result[idx] = e.target.value;
 
+    //배열값 변경
     setTitValue(result);
- 
   }
 
   //수정값을 atom에 반환
   const handleModify = (idx) => {
 
+    //atom을 복사
     const arr = [...count];
 
-   
-
+    //입력란에 2글자 이상 써야 수정이 가능
     if(titValue[idx].length > 1){
 
       let check = window.confirm('수정하시겠습니까?');
 
       if(check) {
 
+        //복사한 배열에 title값을 변경
         arr[idx] ={
           ...arr[idx],
           title: titValue[idx]
         }
 
+        //복사한 배열값을 atom값으로 변경
         setCount(arr);
 
         alert('수정되었습니다.');
       }else {
         return false;
       }
-
-      
   
     }else {
       alert('최소 2자리를 입력해주세요');

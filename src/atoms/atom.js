@@ -14,6 +14,7 @@ export const PostData = atom({
 
 
 //api 호출 selector / selector는 atom의 상태 기반으로 계산하거나 비동기 통신을 하는 함수
+//이 selector는 읽기전용이라 수정이 불가능함.
 export const GetPostData = selector({
     key: "getPostData",
     get: async () => {

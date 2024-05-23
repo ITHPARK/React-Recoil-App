@@ -7,6 +7,7 @@ const Pagination = ({setCurrentPage, pagingCurrent ,setPagingCurrent, listLen}) 
   const [pagingArr, setPagingArr] = useState([]);
 
  
+  //페이징 클릭 이벤트
   const handleClickPaging = (e) => {
     if(e) {
       //마지막 페이지면 작동을 안한다.
@@ -31,6 +32,7 @@ const Pagination = ({setCurrentPage, pagingCurrent ,setPagingCurrent, listLen}) 
     const start = (pagingCurrent - 1) * 5 + 1;
     const end = start + 4;
     const newPagingArr = [];
+
     for (let i = start; i <= end; i++) {
       newPagingArr.push(i);
     }
@@ -38,6 +40,7 @@ const Pagination = ({setCurrentPage, pagingCurrent ,setPagingCurrent, listLen}) 
 
   }, [pagingCurrent, listLen]);
 
+  // currentPage를 변경시켜 페이지에 따라 리스트 노출되게하는 함수
   const handleClickList = (e) => {
     setCurrentPage(e);
   }

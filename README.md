@@ -23,8 +23,7 @@
 
 ## 4. 프로젝트 제작을 하면서 느낀점
 ### Redux보다 편리함
-- Redux처럼 store, actions, reducers을 사전에 정의하지 않고 atom과 selector 두가지 개념만 이용을 함에 있어서 간단함을 느꼈으며,
-- useState와 비슷한 useRecoilState를 사용할 수 있어 코드 작성에 있어서 더욱 편리하였습니다.
+- Redux처럼 store, actions, reducers을 사전에 정의하지 않고 atom과 selector 두가지 개념만 이용을 함에 있어서 간단함을 느꼈으며, useState와 비슷한 useRecoilState를 사용할 수 있어 코드 작성에 있어서 더욱 편리하였습니다.
 
   
 
